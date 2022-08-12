@@ -18,9 +18,8 @@ class TasksViewModel extends ChangeNotifier {
   void onUpdateTask({required Task task}) {
     final int index = allTasks.indexOf(task);
     allTasks.remove(task);
-    task.isDone == false
-        ? allTasks.insert(index, task.copyWith(isDone: true))
-        : allTasks.insert(index, task.copyWith(isDone: false));
+    final newState = task.isDone ?? false;
+    allTasks.insert(index, task.copyWith(isDone: !newState));
     notifyListeners();
   }
 
